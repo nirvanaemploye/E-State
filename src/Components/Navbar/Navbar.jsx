@@ -1,5 +1,5 @@
 import React from "react";
-import Contact from "../Contact/Contact";
+import Logo from "../../assets/logo.svg";
 
 const NavbarData = [
   {
@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <nav className="absolute top-0 left-0 w-full z-10 ">
       <div className="container mx-auto flex justify-between items-center px-6 py-4 md:px-20 lg:px-24">
-        <img src="./src/assets/logo.svg" alt=""  className="cursor-pointer"/>
+        <img src={Logo} alt=""  className="cursor-pointer"/>
         <ul className="hidden md:flex space-x-7 font-medium text-white">
           {NavbarData.map((item, index) => (
             <li key={index}>
