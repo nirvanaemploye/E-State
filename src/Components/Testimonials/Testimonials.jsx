@@ -3,6 +3,7 @@ import Rate from "../../assets/star_icon.svg";
 import profile_img_1 from "../../assets/profile_img_1.png";
 import profile_img_2 from "../../assets/profile_img_2.png";
 import profile_img_3 from "../../assets/profile_img_3.png";
+import { motion } from "framer-motion";
 
 const testimonialsData = [
   {
@@ -33,31 +34,42 @@ const testimonialsData = [
 
 const Testimonials = () => {
   return (
-    <section
+    <section className="bg-gray-50">
+    <div
       className="container mx-auto py-10 lg:px-32 w-full overflow-hidden"
       id="testimonials"
     >
-      <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center">
-        Customer
-        <span className="underline underline-offset-4 decoration-1 under font-light ms-2">
-          Testimonials
-        </span>
-      </h1>
-      <p className="text-center text-gray-500 mb-12 max-w-80 mx-auto">
-        Real Stories from Those Who Found Home with Us
-      </p>
-
+      <motion.div
+        initial={{ opacity: 0, y: -50, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+        className="text-center"
+      >
+        <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center">
+          Customer
+          <span className="underline underline-offset-4 decoration-1 under font-light ms-2">
+            Testimonials
+          </span>
+        </h1>
+        <p className="text-center text-gray-500 mb-12 max-w-80 mx-auto">
+          Real Stories from Those Who Found Home with Us
+        </p>
+      </motion.div>
       <div className="flex flex-wrap justify-center gap-8">
         {testimonialsData.map((testimonial, index) => (
-          <div
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: index * 0.2, ease: "easeIn" }}
+            viewport={{ once: true, amount: 0.3 }}
             key={index}
-            className="hover:scale-105   translaion-all duration-300 max-w-[314px] border shadow-lg rounded px-8 py-12 text-center"
+            className="hover:scale-105 transition-all duration-300 max-w-[314px] border shadow-lg rounded px-8 py-12 text-center"
           >
-            
             <img
               className="w-20 h-20 rounded-full mx-auto mb-4"
               src={testimonial.image}
-              alt=""
+              alt={testimonial.alt}
             />
             <h1 className="text-xl text-gray-700  font-medium">
               {testimonial.name}
@@ -69,9 +81,10 @@ const Testimonials = () => {
               ))}
             </div>
             <p className="text-gray-600">{testimonial.text}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
+    </div>
     </section>
   );
 };

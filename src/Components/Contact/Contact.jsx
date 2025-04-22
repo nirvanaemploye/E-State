@@ -1,6 +1,6 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { toast } from "react-toastify";
-
 
 const Contact = () => {
   const [result, setResult] = React.useState("");
@@ -34,21 +34,32 @@ const Contact = () => {
       className="container p-6 py-20 lg:py-32 w-full overflow-hidden"
       id="contact"
     >
-      <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center">
-        Contact{" "}
-        <span className="underline underline-offset-4 decoration-1 under font-light">
-          With Us
-        </span>
-      </h1>
-      <p className="text-center text-gray-500 mb-12 max-w-80 mx-auto">
-        Ready to Make a Move? Let’s Build Your Future Together
-      </p>
+      <motion.div
+        initial={{ opacity: 0, y: -50, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center">
+          Contact{" "}
+          <span className="underline underline-offset-4 decoration-1 under font-light">
+            With Us
+          </span>
+        </h1>
+        <p className="text-center text-gray-500 mb-12 max-w-80 mx-auto">
+          Ready to Make a Move? Let’s Build Your Future Together
+        </p>
+      </motion.div>
 
-      <form
+      <motion.form
+        initial={{ opacity: 0, y: -50, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.4, ease: "easeInOut" }}
+        viewport={{ once: true, amount: 0.3 }}
         onSubmit={onSubmit}
         className="max-w-2xl mx-auto text-gray-600 pt-8"
       >
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap space-y-4 ">
           <div className="w-full md:w-1/2 text-left">
             Your Name
             <input
@@ -70,7 +81,7 @@ const Contact = () => {
             />
           </div>
         </div>
-        <div className="my-6 text-left">
+        <div className="my-5 text-left">
           Message
           <textarea
             className="w-full border border-gray-300 py-3 rounded h-48 resize-none px-4 mt-2"
@@ -86,7 +97,7 @@ const Contact = () => {
         >
           {result ? result : "Submit"}
         </button>
-      </form>
+      </motion.form>
     </section>
   );
 };

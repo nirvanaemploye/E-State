@@ -38,9 +38,12 @@ const Footer = () => {
           <h1 className="text-white text-lg font-bold mb-4">Company</h1>
           <ul className="text-gray-400 gap-2">
             {NavbarData.map((item, index) => (
-              <li key={index} className="text-gray-400 mb-2 hover:text-white">
-                <a href={item.link}>{item.name}</a>
-              </li>
+              <li key={index} className="group mb-2">
+              <a href={item.link} className="text-gray-400 group-hover:text-white transition-colors duration-200">
+                {item.name}
+              </a>
+            </li>
+            
             ))}
           </ul>
         </div>
@@ -55,12 +58,13 @@ const Footer = () => {
           <div className="flex gap-2">
             <input
               type="email"
+              name="email"
               placeholder="Enter your email"
               className="bg-gray-700 text-white p-2 rounded border border-gray-600 focus:outline-none focus:border-gray-500 w-full md:w-auto"
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:scale-105 translateall duration-300"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:scale-105 transition-all duration-300"
             >
               Subscribe
             </button>

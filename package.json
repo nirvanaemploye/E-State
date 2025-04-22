@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "motion": "^12.7.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-toastify": "^11.0.5"
+    "react-toastify": "^11.0.5",
+    "tw-elements": "^2.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

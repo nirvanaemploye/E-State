@@ -7,6 +7,7 @@ import project_img_5 from "../../assets/project_img_5.jpg";
 import project_img_6 from "../../assets/project_img_6.jpg";
 import prev from "../../assets/left_arrow.svg";
 import next from "../../assets/right_arrow.svg";
+import { motion } from "motion/react";
 
 const projectsData = [
   {
@@ -58,21 +59,21 @@ const Projects = () => {
       } else {
         setCardsToShow(2);
       }
-      updateCardsToShow();
-
-      window.addEventListener("resize", updateCardsToShow);
-      return () => window.removeEventListener("resize", updateCardsToShow);
     };
+
+    updateCardsToShow(); // Call the function here
+
+    window.addEventListener("resize", updateCardsToShow);
+    return () => window.removeEventListener("resize", updateCardsToShow);
   }, []);
 
-  
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % projectsData.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 2) % projectsData.length);
   };
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? projectsData.length - 1 : prevIndex - 1
+      prevIndex === 0 ? projectsData.length - 1 : prevIndex - 2
     );
   };
   return (
@@ -80,7 +81,13 @@ const Projects = () => {
       className="container mx-auto py-4 pt-20 px-6 md:px-20 lg:px-32 my-20 end-full overflow-hidden"
       id="projects"
     >
-      <div>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+        className="mb-8"
+      >
         <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center">
           Projects{" "}
           <span className="underline underline-offset-4 decoration-1 under font-light">
@@ -90,55 +97,68 @@ const Projects = () => {
         <p className="text-gray-500 max-w-80 text-center mb-8 mx-auto">
           Crafting Spaces, Building Legacies—Explore Our Portfolio
         </p>
-      </div>
+      </motion.div>
 
       {/* slider button  */}
-      <div className="flex justify-end items-center mb-8">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.5, ease: "easeInOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+        className="flex justify-end items-center mb-8"
+      >
         <button
           onClick={handlePrev}
-          className="p-3 bg-gray-200 rounded mr-2"
+          className="p-3 bg-gray-200 rounded mr-2 hover:bg-gray-300 transition-colors duration-200"
           aria-label="prev"
         >
           <img src={prev} alt="prev" />
         </button>
         <button
           onClick={handleNext}
-          className="p-3 bg-gray-200 rounded mr-2"
+          className="p-3 bg-gray-200 rounded mr-2 hover:bg-gray-300 transition-colors duration-200"
           aria-label="next"
         >
           <img src={next} alt="next" />
         </button>
-      </div>
+      </motion.div>
 
       {/* Project Slider container */}
 
       <div className="overflow-hidden">
-        <div
-          className="flex gap-8 transition-transform duration-700 ease-in-out"
-          style={{
-            transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
-          }}
+        <motion.div
+          className="flex gap-8"
+          animate={{ x: `-${currentIndex * (100 / cardsToShow)}%` }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
         >
           {projectsData.map((project, index) => (
-            <div key={index} className="relative flex-shrink-0 w-full sm:w-1/4">
+            <motion.div
+              initial={{ opacity: 0, x: 10, scale: 0.98 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="relative flex-shrink-0 w-full sm:w-1/4 group"
+              key={index}
+            >
               <img
                 src={project.image}
                 alt={project.title}
                 className="w-full h-auto object-cover mb-14"
               />
               <div className="absolute left-0 right-0 bottom-5 flex justify-center">
-                <div className="inline-block bg-white w-3/4 px-4 py-2 shadow-md">
+                <div className="inline-block bg-white w-3/4 px-4 py-2 shadow-md group-hover:scale-110 transition-all duration-300">
                   <h2 className="text-xl font-semibold text-gray-800">
                     {project.title}
                   </h2>
                   <p className="text-gray-500 text-sm sm:text-md">
-                    {project.price} <span className="px-1">|</span> {project.location}
+                    {project.price} <span className="px-1">|</span>{" "}
+                    {project.location}
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
